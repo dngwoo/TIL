@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <blog-post
+        :post-title="postTitle"
+        @update:title="receiveEvent"
+      ></blog-post>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // area
+      const app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            postTitle: "Vue를 배워봅시다!",
+          };
+        },
+        methods: {
+          receiveEvent(event, pageTitle) {
+            this.postTitle = pageTitle;
+            console.log(event);
+            console.log("I received event!");
+          },
+        },
+        components: {
+          "blog-post": {
+            props: {
+              postTitle: {
+                type: String,
+                default: "",
+              },
+            },
+            template:
+              "<div><header>{{ postTitle }}</header><button v-on:click='passEvent($event)'>Magic Button to change post title</button></div>",
+            methods: {
+              passEvent(event) {
+                this.$emit("update:title", event, "Vue Master!");
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<!-- html은 대소문자 구별을 하지않고 대문자를 소문자로 전부 변형시키기 때문에 이벤트
+이름을 넘겨줄때 카멜케이스를 사용하면 안된다. (e.g. updateTitle <- X)-->

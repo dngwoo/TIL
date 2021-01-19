@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <blog-post>
+        <template v-slot:default> 12313 </template>
+      </blog-post>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        components: {
+          "blog-post": {
+            template: "<div><slot></slot><div>",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<!-- props로 보낸값을 자식컴포넌트에서 초기값으로 사용하고 싶다면
+data 옵션에 넣어두고 사용한다. 변형을 해야될 경우는 computed에 넣어서 활용한다. -->

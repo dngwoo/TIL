@@ -1,0 +1,88 @@
+<!-- 보충 필요 -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        {{a}}
+        <button @click="a=11">a값 바꾸기</button>
+      </div>
+      <div>
+        {{b}}
+        <button @click="b=11">b값 바꾸기</button>
+      </div>
+      <div>
+        {{c}}
+        <button @click="c=11">c값 바꾸기</button>
+      </div>
+      <div>
+        {{d}}
+        <button @click="d=11">d값 바꾸기</button>
+      </div>
+      <div>
+        {{e.f}}
+        <button @click="e.f=11">f값 바꾸기</button>
+      </div>
+      <div>
+        {{e.f.g}}
+        <button @click="e.f.g=11">g값 바꾸기</button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          a: 1,
+          b: 2,
+          c: 3,
+          d: 4,
+          e: {
+            f: {
+              g: 5,
+            },
+          },
+        },
+        watch: {
+          a(val, oldVal) {
+            console.log("new 'a' value: %s, old 'a' value: %s", val, oldVal);
+          },
+          b: "watchB",
+          c: {
+            handler(val, oldVal) {
+              console.log("new 'c' value: %s, old 'c' value: %s", val, oldVal);
+            },
+          },
+          d: {
+            handler: "watchD",
+            immediate: true, // 즉시 바로 실행
+          },
+          e: ["watchF"],
+        },
+        methods: {
+          watchB(val, oldVal) {
+            console.log("new 'b' value: %s, old 'b' value: %s", val, oldVal);
+          },
+          watchD(val, oldVal) {
+            console.log("new 'd' value: %s, old 'd' value: %s", val, oldVal);
+          },
+          watchF(val, oldVal) {
+            console.log("new 'f' value: %s, old 'f' value: %s", val, oldVal);
+          },
+          watchG(val, oldVal) {
+            console.log("new 'g' value: %s, old 'g' value: %s", val, oldVal);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<!-- e: [ 'handle1', function handle2 (val, oldVal) {  }, { handler: function handle3 (val, oldVal) {  },  } ] <- 3가지 방법으로 넣을 수 있음.-->

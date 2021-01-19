@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <blog-post>
+        <template v-slot:default="slotScope">{{ slotScope }}</template>
+        <!-- <template v-slot:default="slotScope">{{ slotScope.title }}</template> -->
+        <!-- <template v-slot:default="{ title }">{{ title }}</template> -->
+        <template v-slot:header> header </template>
+        <template #main> body </template>
+      </blog-post>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        components: {
+          "blog-post": {
+            data() {
+              return {
+                title: "Vue Tutorial",
+              };
+            },
+            template:
+              "<div><slot :title='title'></slot><slot name='header'></slot><slot name='main'></slot></div>",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

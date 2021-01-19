@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="value" />
+      <div>{{computedValue}}</div>
+      <button @click="computedValue = '초기화되었습니다.'">init</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          value: "",
+        },
+        computed: {
+          computedValue: {
+            get() {
+              return this.value;
+            },
+            set(value) {
+              this.value = value;
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

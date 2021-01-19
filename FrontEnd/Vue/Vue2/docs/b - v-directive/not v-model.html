@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" :value="value" @input="changeValue" />
+      <div>{{ value }}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          value: "",
+        },
+        methods: {
+          changeValue(e) {
+            this.value = e.target.value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<!-- 한글은 첫글자 끝나야 적용되기 때문에 이렇게 사용해주는것이 좋음 -->

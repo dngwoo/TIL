@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <blog-post :post-title.sync="postTitle"></blog-post>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // area
+      const app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            postTitle: "Vue를 배워봅시다!",
+          };
+        },
+        components: {
+          "blog-post": {
+            props: {
+              postTitle: {
+                type: String,
+                default: "",
+              },
+            },
+            template:
+              "<div><header>{{ postTitle }}</header><button v-on:click='passEvent'>Magic Button to change post title</button></div>",
+            methods: {
+              passEvent() {
+                this.$emit("update:postTitle", "Vue Master!");
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
